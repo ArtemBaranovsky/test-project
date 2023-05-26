@@ -65,6 +65,8 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        App\Providers\RepositoryServiceProvider::class,
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
