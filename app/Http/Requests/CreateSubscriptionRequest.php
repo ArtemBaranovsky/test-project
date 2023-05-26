@@ -23,7 +23,7 @@ class CreateSubscriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'plan_id' => 'required|exists:plans,id',
         ];
     }
 }

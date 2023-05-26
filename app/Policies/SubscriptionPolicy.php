@@ -4,70 +4,35 @@ namespace App\Policies;
 
 use App\Models\Subscription;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SubscriptionPolicy
 {
-    // Add exact policies
-    /**
-     * Determine whether the user can view any models.
-     */
+    use HandlesAuthorization;
+
     public function viewAny(User $user): bool
     {
-        //
         return true;
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Subscription $subscription): bool
-    {
-        //
-        return true;
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): bool
     {
-        //
-        return true;
+        return $this->hasAccess($user);
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, Subscription $subscription): bool
     {
-        //
-        return true;
+        return $this->hasAccess($user);
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
     public function delete(User $user, Subscription $subscription): bool
     {
-        //
-        return true;
+        return $this->hasAccess($user);
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Subscription $subscription): bool
+    private function hasAccess(User $user): bool
     {
-        //
-        return true;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Subscription $subscription): bool
-    {
-        //
-        return true;
+        $allowedRoles = ['publisher', 'moderator', 'admin'];
+        return in_array($user->role, $allowedRoles);
     }
 }

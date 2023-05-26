@@ -23,7 +23,7 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'subscription_id' => 'required|exists:subscriptions,id',
         ];
     }
 }
